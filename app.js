@@ -10,12 +10,14 @@ function mostrarProuctos(){
     console.table(productos)
 }
 
-
-
 function productosStockBajo(productos){
     const stockBajo = productos.filter(productos => productos.stock < 5);
     console.table(stockBajo);
     return stockBajo;
 }
 
-productosStockBajo(productos);
+function productosAgotados(productos){
+    const agotados = productos.filter(pdt => pdt.stock <=0);// crea array con productos agotados
+    console.table(agotados);
+    return agotados;
+}
