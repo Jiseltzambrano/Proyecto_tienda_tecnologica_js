@@ -23,3 +23,13 @@ function totalVentas(productos){
     return totalVentas;
 }
 
+function existenciaStock(productos){
+if (productos.every(pdt => pdt.stock > 0)){
+ console.log("Todos los productos están disponibles.");
+}
+if (productos.some(pdt => pdt.stock === 0)){
+    const productosAgotados = productos.filter(pdt => pdt.stock === 0).map(pdt => pdt.nombre);
+    console.table(`Productos agotados: \n${productosAgotados.join("\n")}`);
+}
+}
+
