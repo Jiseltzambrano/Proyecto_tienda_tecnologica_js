@@ -30,4 +30,13 @@ function preciosNombres (productos) {
     return preciosNombres;
 
 }
+function valorTotalInventario(productos){
+    const totalInventario = productos.reduce((acc, pdt)=> acc + (pdt.precio * pdt.stock),0);//se calcula el total multiplicando el precio por el stock de cada elemento
+    const totalStock = productos.map(pdt => pdt.nombre + ": " + pdt.stock);
+    console.log(`Stock por producto: `);
+    console.table(`${totalStock.join("\n")}`);
+    console.log(`El valor total de del iventario es: ${totalInventario}`)
+    return totalInventario;
+}
+
 
