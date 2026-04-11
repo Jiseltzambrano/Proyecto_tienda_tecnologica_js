@@ -21,3 +21,13 @@ function productosAgotados(productos){
     console.table(agotados);
     return agotados;
 }
+
+
+function preciosNombres (productos) {
+    const preciosNombres = productos.map (producto => ({nombre: producto.nombre, precio: producto.precio}));
+    console.log("Precios y nombres de los productos:");
+    console.table(preciosNombres);
+    return preciosNombres;
+
+}
+
