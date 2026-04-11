@@ -136,16 +136,16 @@ function clasificarPorPrecio(productos) {
 // clasificarPorPrecio(productos);
 
 function combinacionesObligatorias(productos) {
-  function ordenPrecio() {
+//   filtrar productos disponibles por precio y ordenarlos es orden ascendente
+    function ordenPrecio() {
     const ordenadosPorPrecio = [...productos]
       .filter((pdt) => pdt.stock > 0)
       .sort((a, b) => a.precio - b.precio);
-
     console.log(`productos ordenados por precio ascendente:`);
     console.table(ordenadosPorPrecio);
     return ordenadosPorPrecio;
   }
-
+// identificar productos agotados y crear un mensaje de reabastecimiento
   function reabastecimiento() {
     const agotados = productosAgotados(productos);
     const reabastecimiento = agotados.map(
@@ -154,6 +154,7 @@ function combinacionesObligatorias(productos) {
     console.log(reabastecimiento);
     return reabastecimiento;
   }
+//   calcular precio de venta de stock actual
   function venderStockActual() {
     const precioStockActual = productos.reduce(
       (acc, pdt) => acc + pdt.stock * pdt.precio,
@@ -162,12 +163,13 @@ function combinacionesObligatorias(productos) {
     console.log(`El precio del stock actual es: ${precioStockActual} `);
     return precioStockActual;
   }
+//   encontrar por medio de sort el producto más vendido
   function productoMasVendido() {
     const masVendido = [...productos].sort(
       (menor, mayor) => mayor.ventas - menor.ventas,
     );
     console.log(`el producto más vendido es: }`);
-    console.table(masVendido[0]);
+    console.table(masVendido[0]);//la pirmera ubicacióndel orden descenente es el producto más vendido
     return masVendido;
   }
 
@@ -177,4 +179,4 @@ function combinacionesObligatorias(productos) {
   productoMasVendido();
 }
 
-combinacionesObligatorias(productos);
+combinacionesObligatorias(productos); //llamar función combinaciones, también llama todas las funciones interiores
