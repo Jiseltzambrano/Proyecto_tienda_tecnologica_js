@@ -4,3 +4,18 @@ stock: 10, ventas: 12 }, { id: 2, nombre: "Teclado", categoria: "Periferico", pr
 800000, stock: 2, ventas: 4 }, { id: 4, nombre: "USB", categoria: "Accesorio", precio:
 30000, stock: 0, ventas: 15 }, { id: 5, nombre: "Diadema", categoria: "Audio", precio:
 90000, stock: 8, ventas: 6 } ];
+
+const readline = require("readline").createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+function buscarProductoPorNombre(producto){
+    const resultado = productos.find(pdt => pdt.nombre.toLowerCase() === producto.toLowerCase());
+    console.table(resultado);
+    return resultado;
+}
+readline.question("Ingrese el nombre del producto a buscar: ", (nombre) => {
+    buscarProductoPorNombre(nombre);
+    readline.close();
+});
