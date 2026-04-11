@@ -4,3 +4,13 @@ stock: 10, ventas: 12 }, { id: 2, nombre: "Teclado", categoria: "Periferico", pr
 800000, stock: 2, ventas: 4 }, { id: 4, nombre: "USB", categoria: "Accesorio", precio:
 30000, stock: 0, ventas: 15 }, { id: 5, nombre: "Diadema", categoria: "Audio", precio:
 90000, stock: 8, ventas: 6 } ];
+
+function preciosNombres (productos) {
+    const preciosNombres = productos.map (producto => ({nombre: producto.nombre, precio: producto.precio}));
+    console.log("Precios y nombres de los productos:");
+    console.table(preciosNombres);
+    return preciosNombres;
+
+}
+
+preciosNombres(productos);
