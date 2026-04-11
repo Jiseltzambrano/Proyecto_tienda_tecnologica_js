@@ -10,3 +10,12 @@ function mostrarProuctos(){
     console.table(productos)
 }
 
+
+
+function productosStockBajo(productos){
+    const stockBajo = productos.filter(productos => productos.stock < 5);
+    console.table(stockBajo);
+    return stockBajo;
+}
+
+productosStockBajo(productos);
