@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const productos = [ 
 { id: 1, nombre: "Mouse", categoria: "Periferico", precio: 50000,stock: 10, ventas: 12 }, 
 { id: 2, nombre: "Teclado", categoria: "Periferico", precio:120000, stock: 5, ventas: 7 }, 
@@ -73,7 +72,6 @@ if (productos.some(pdt => pdt.stock === 0)){
     console.table(`Productos agotados: \n${productosAgotados.join("\n")}`);
 }
 }
-=======
 
 function clasificarPorPrecio(productos) {
   const clasificar = productos.map((pdt) =>{
@@ -92,4 +90,4 @@ function clasificarPorPrecio(productos) {
 }
 
 clasificarPorPrecio(productos);
->>>>>>> feature/clasificar-precio
+
