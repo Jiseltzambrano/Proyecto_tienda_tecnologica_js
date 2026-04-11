@@ -35,8 +35,15 @@ function valorTotalInventario(productos){
     const totalStock = productos.map(pdt => pdt.nombre + ": " + pdt.stock);
     console.log(`Stock por producto: `);
     console.table(`${totalStock.join("\n")}`);
-    console.log(`El valor total de del iventario es: ${totalInventario}`)
+    console.log(`El valor total de del iventario es: ${totalInventario}`);
     return totalInventario;
 }
 
+function totalVentas(productos){
+    const totalVentas = productos.reduce((acc, pdt) => acc + pdt.ventas, 0);
+    console.log(`El total de ventas es: ${totalVentas}`);
+    const totalPrecioVentas = productos.reduce((acc, pdt) => acc + (pdt.precio * pdt.ventas), 0);
+    console.log(`El total de ingresos de ventas es: ${totalPrecioVentas}`);
+    return totalVentas;
+}
 
