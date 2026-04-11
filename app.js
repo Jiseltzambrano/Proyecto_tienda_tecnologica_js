@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const productos = [ 
 { id: 1, nombre: "Mouse", categoria: "Periferico", precio: 50000,stock: 10, ventas: 12 }, 
 { id: 2, nombre: "Teclado", categoria: "Periferico", precio:120000, stock: 5, ventas: 7 }, 
@@ -72,3 +73,23 @@ if (productos.some(pdt => pdt.stock === 0)){
     console.table(`Productos agotados: \n${productosAgotados.join("\n")}`);
 }
 }
+=======
+
+function clasificarPorPrecio(productos) {
+  const clasificar = productos.map((pdt) =>{
+    switch (true) {
+      case pdt.precio > 400000:
+        return console.log(`${pdt.nombre} es Caro/a`);
+      case pdt.precio <= 400000 && pdt.precio > 100000:
+        return console.log(`${pdt.nombre} es Intermedio/a`);
+      case pdt.precio <= 100000 && pdt.precio > 0:
+        return console.log(`${pdt.nombre} es Barato/a`);
+      default:
+        return console.log("error: precio negativo o no válido");
+    }
+  });
+  return clasificar;
+}
+
+clasificarPorPrecio(productos);
+>>>>>>> feature/clasificar-precio
