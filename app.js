@@ -47,7 +47,6 @@ function totalVentas(productos){
     return totalVentas;
 }
 
-
 const readline = require("readline").createInterface({
     input: process.stdin,
     output: process.stdout
@@ -58,7 +57,18 @@ function buscarProductoPorNombre(producto){
     console.table(resultado);
     return resultado;
 }
+
 readline.question("Ingrese el nombre del producto a buscar: ", (nombre) => {
     buscarProductoPorNombre(nombre);
     readline.close();
 });
+
+function existenciaStock(productos){
+if (productos.every(pdt => pdt.stock > 0)){
+ console.log("Todos los productos están disponibles.");
+}
+if (productos.some(pdt => pdt.stock === 0)){
+    const productosAgotados = productos.filter(pdt => pdt.stock === 0).map(pdt => pdt.nombre);
+    console.table(`Productos agotados: \n${productosAgotados.join("\n")}`);
+}
+}
