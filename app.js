@@ -47,3 +47,18 @@ function totalVentas(productos){
     return totalVentas;
 }
 
+
+const readline = require("readline").createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+function buscarProductoPorNombre(producto){
+    const resultado = productos.find(pdt => pdt.nombre.toLowerCase() === producto.toLowerCase());
+    console.table(resultado);
+    return resultado;
+}
+readline.question("Ingrese el nombre del producto a buscar: ", (nombre) => {
+    buscarProductoPorNombre(nombre);
+    readline.close();
+});
