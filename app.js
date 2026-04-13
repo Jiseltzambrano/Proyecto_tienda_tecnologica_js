@@ -180,3 +180,77 @@ function combinacionesObligatorias(productos) {
 }
 
 combinacionesObligatorias(productos); //llamar función combinaciones, también llama todas las funciones interiores
+
+
+function reporteObligatorio (productos){
+// Esta función busca el producto con el precio más alto.
+
+// 1. Producto más caro
+function productoMasCaro() {
+  const listaOrdenada = [...productos].sort((a, b) => b.precio - a.precio);
+  const resultado = listaOrdenada[0];
+
+  console.log("Producto más caro:");
+  console.table([resultado]);
+  return resultado;
+}
+
+// 2. Producto más barato
+function productoMasBarato() {
+  const listaOrdenada = [...productos].sort((a, b) => a.precio - b.precio);
+  const resultado = listaOrdenada[0];
+
+  console.log("Producto más barato:");
+  console.table(resultado);
+  return resultado;
+}
+
+// 3. Producto más vendido
+function productoMasVendido() {
+  const listaOrdenada = [...productos].sort((a, b) => b.ventas - a.ventas);
+  const resultado = listaOrdenada[0];
+
+  console.log("Producto más vendido:");
+  console.table([resultado]);
+  return resultado;
+}
+
+// 4. Valor total del inventario
+function valorTotalInventario() {
+  const resultado = productos.reduce((acumulador, producto) => {
+    return acumulador + producto.precio * producto.stock;
+  }, 0);//Significa que reduce() empieza sumando desde 0.
+
+  console.log("Valor total del inventario:", resultado);
+  return resultado;
+}
+
+// 5. Total de unidades vendidas
+function totalUnidadesVendidas() {
+  const resultado = productos.reduce((acumulador, producto) => {
+    return acumulador + producto.ventas;
+  }, 0);//Significa que reduce() empieza sumando desde 0.
+
+  console.log("Total de unidades vendidas:", resultado);
+
+  return resultado;
+}
+
+// 6. Cantidad de productos agotados
+function cantidadProductosAgotados() {
+  const listaAgotados = productos.filter((producto) => producto.stock === 0);
+  const resultado = listaAgotados.length;
+
+  console.log("Cantidad de productos agotados:", resultado);
+  return resultado;
+}
+
+// Llamado de funciones
+productoMasCaro();
+productoMasBarato();
+productoMasVendido();
+valorTotalInventario();
+totalUnidadesVendidas();
+cantidadProductosAgotados();
+}
+reporteObligatorio(productos);
