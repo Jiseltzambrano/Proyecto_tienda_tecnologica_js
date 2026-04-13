@@ -89,21 +89,25 @@ function totalVentas(productos) {
   return totalVentas;
 }
 
-const readline = require("readline").createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+function ordenarPorPrecio(productos){
+    const ordenados =  productos.sort((a, b) => a.precio - b.precio);
+    console.table(ordenados);
+    return ordenados;
+
+}
+
 
 function buscarProductoPorNombre(producto){
     const resultado = productos.find(pdt => pdt.nombre.toLowerCase() === producto.toLowerCase());
-    console.table(resultado);
+     if (resultado) {
+    console.table([resultado]);
+  } else {
+    console.log("Producto no encontrado");
+  }
     return resultado;
 }
 
-readline.question("Ingrese el nombre del producto a buscar: ", (nombre) => {
-    buscarProductoPorNombre(nombre);
-    readline.close();
-});
+
 
 function existenciaStock(productos) {
   if (productos.every((pdt) => pdt.stock > 0)) {
@@ -168,8 +172,7 @@ function combinacionesObligatorias(productos) {
     const masVendido = [...productos].sort(
       (menor, mayor) => mayor.ventas - menor.ventas,
     );
-    console.log(`el producto más vendido es: }`);
-    console.table(masVendido[0]);//la pirmera ubicacióndel orden descenente es el producto más vendido
+    console.log(`el producto más vendido es: ${masVendido[0].nombre}`);//la primera ubicación del orden descendente es el producto más vendido
     return masVendido;
   }
 
@@ -177,9 +180,9 @@ function combinacionesObligatorias(productos) {
   reabastecimiento();
   venderStockActual();
   productoMasVendido();
+  //llamar función combinaciones, también llama todas las funciones interiores
 }
 
-combinacionesObligatorias(productos); //llamar función combinaciones, también llama todas las funciones interiores
 
 
 function reporteObligatorio (productos){
@@ -253,4 +256,86 @@ valorTotalInventario();
 totalUnidadesVendidas();
 cantidadProductosAgotados();
 }
-reporteObligatorio(productos);
+
+const readline = require("readline").createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+function menu () {
+  let opcion = ""; 
+
+  while (opcion !== "13") {
+    console.log(`
+    Menú de opciones:
+    1. mostrar productos
+    2. productos con stock bajo
+    3. productos agotados
+    4. precios y nombres de los productos
+    5. valor total del inventario
+    6. total de ventas
+    7. Ordenar productos por precio
+    8. buscar producto por nombre
+    9. existencia de stock
+    10. clasificar productos por precio
+    11. combinaciones obligatorias
+    12. reporte obligatorio
+    13. salir
+    `);
+      
+    readline.question("Seleccione una opción(numero): ", (respuesta) => {
+
+      opcion = respuesta;
+      switch (opcion) {
+        case "1":
+          mostrarProuctos();
+          break;
+        case "2":
+          productosStockBajo(productos);
+          break;
+        case "3":
+          productosAgotados(productos);
+          break;
+        case "4":
+          preciosNombres(productos);
+          break;
+        case "5":
+          valorTotalInventario(productos);
+          break;
+        case "6":
+          totalVentas(productos);
+          break;
+        case "7":
+          ordenarPorPrecio(productos);
+          break;
+        case "8":
+          readline.question("Ingrese el nombre del producto a buscar: ", (producto) => {
+          buscarProductoPorNombre(producto);
+          menu(); // Llamar al menú nuevamente después de ejecutar la búsqueda
+        });
+        return; // Salir de la función actual para evitar que el menú se ejecute dos veces debido a la pregunta anidada 
+        case "9":
+            existenciaStock(productos);
+            break;
+        case "10":
+            clasificarPorPrecio(productos);
+            break;
+        case "11":
+            combinacionesObligatorias(productos);
+            break;
+        case "12":
+            reporteObligatorio(productos);
+            break;
+        case "13":
+            console.log("Saliendo del programa...");
+            readline.close();
+            return;
+        default:
+          console.log("Opción no válida, por favor intente de nuevo.");            
+      }
+      menu(); // Llamar al menú nuevamente después de ejecutar la opción seleccionada
+    });
+    break;// Salir del bucle después de la primera iteración para evitar múltiples preguntas
+  }
+}
+menu();
