@@ -42,7 +42,7 @@ const productos = [
 ];
 
 function mostrarProuctos() {
-  console.table(productos)
+  console.table(productos);
 }
 
 function productosStockBajo(productos) {
